@@ -1,20 +1,31 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
+import { useRef, useEffect } from "react"
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.7 // 70% speed - slower, more cinematic
+    }
+  }, [])
+
   return (
     <section className="relative flex h-screen min-h-[600px] items-center justify-center overflow-hidden">
-      {/* Background image */}
-      <Image
-        src="/images/hero.jpg"
-        alt="Colonial wooden house on a jungle cliff overlooking turquoise waters"
-        fill
-        className="object-cover"
-        priority
-        quality={90}
-      />
+      {/* Background video */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/images/hero.jpg"
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
+      </video>
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-primary/50" />
