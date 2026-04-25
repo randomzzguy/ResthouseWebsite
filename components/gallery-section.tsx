@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { FadeIn } from "./fade-in"
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   Waves,
   Fish,
@@ -34,39 +34,45 @@ import {
   ChevronRight,
   ChevronLeft,
   Flame,
+  Grid3X3,
 } from "lucide-react"
 
 const images = [
-  {
-    src: "/images/gallery-water.jpg",
-    alt: "Crystal clear turquoise waters of Perhentian",
-    tall: true,
-  },
-  {
-    src: "/images/gallery-brass.jpg",
-    alt: "Vintage brass fittings on dark colonial timber",
-    tall: false,
-  },
-  {
-    src: "/images/gallery-monkeys.jpg",
-    alt: "Macaque monkeys in the surrounding jungle",
-    tall: false,
-  },
-  {
-    src: "/images/gallery-turtle.jpg",
-    alt: "Sea turtle swimming in clear tropical waters",
-    tall: true,
-  },
-  {
-    src: "/images/gallery-interior.jpg",
-    alt: "Heritage interior with dark wood beams and white linens",
-    tall: false,
-  },
-  {
-    src: "/images/gallery-botanical.jpg",
-    alt: "Lush tropical foliage surrounding the resthouse",
-    tall: false,
-  },
+  { src: "/images/1.png", alt: "The Resthouse Perhentian", tall: true },
+  { src: "/images/2.png", alt: "Island view", tall: false },
+  { src: "/images/3.png", alt: "Tropical surroundings", tall: false },
+  { src: "/images/4.png", alt: "Crystal clear waters", tall: true },
+  { src: "/images/5.png", alt: "Beach access", tall: false },
+  { src: "/images/6.png", alt: "Jungle trail", tall: false },
+  { src: "/images/7.png", alt: "Ocean view", tall: true },
+  { src: "/images/8.png", alt: "Coastal scenery", tall: false },
+  { src: "/images/9.png", alt: "Island landscape", tall: false },
+  { src: "/images/10.png", alt: "Tropical paradise", tall: true },
+  { src: "/images/11.png", alt: "Perhentian waters", tall: false },
+  { src: "/images/12.png", alt: "Beachfront view", tall: false },
+  { src: "/images/14.png", alt: "Island life", tall: true },
+  { src: "/images/15.png", alt: "Secluded cove", tall: false },
+  { src: "/images/16.png", alt: "Tropical waters", tall: false },
+  { src: "/images/17.png", alt: "Jungle canopy", tall: true },
+  { src: "/images/18.png", alt: "Rocky coastline", tall: false },
+  { src: "/images/19.png", alt: "Sunset view", tall: false },
+  { src: "/images/20.png", alt: "Marine life", tall: true },
+  { src: "/images/21.png", alt: "Coral reef", tall: false },
+  { src: "/images/22.png", alt: "Underwater world", tall: false },
+  { src: "/images/23.png", alt: "Snorkeling spot", tall: true },
+  { src: "/images/24.png", alt: "Kayaking adventure", tall: false },
+  { src: "/images/25.png", alt: "Island hopping", tall: false },
+  { src: "/images/26.png", alt: "Turtle watching", tall: true },
+  { src: "/images/27.png", alt: "Sea turtle", tall: false },
+  { src: "/images/29.png", alt: "Marine sanctuary", tall: false },
+  { src: "/images/31.png", alt: "Heritage interior", tall: true },
+  { src: "/images/32.png", alt: "Colonial architecture", tall: false },
+  { src: "/images/33.png", alt: "Dark wood beams", tall: false },
+  { src: "/images/34.png", alt: "Vintage fittings", tall: true },
+  { src: "/images/35.png", alt: "Resthouse details", tall: false },
+  { src: "/images/36.png", alt: "Traditional craft", tall: false },
+  { src: "/images/37.png", alt: "Local wildlife", tall: true },
+  { src: "/images/38.png", alt: "Jungle monkeys", tall: false },
 ]
 
 const activities = [
@@ -459,36 +465,137 @@ export function GallerySection() {
         </FadeIn>
 
         {/* Gallery Section */}
-        <FadeIn delay={0.3}>
-          <div className="mt-20">
-            <h3 className="mb-8 text-center font-serif text-2xl font-light tracking-wide text-foreground md:text-3xl">
-              Gallery
-            </h3>
-            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-              {images.map((image, index) => (
-                <FadeIn key={image.src} delay={index * 0.1}>
-                  <div
-                    className={`group relative mb-4 overflow-hidden break-inside-avoid ${
-                      image.tall ? "aspect-[3/4]" : "aspect-[4/3]"
-                    }`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-primary/0 transition-all duration-500 group-hover:bg-primary/20" />
-                    <div className="absolute inset-x-0 bottom-0 translate-y-full p-4 transition-transform duration-500 group-hover:translate-y-0">
-                      <p className="text-sm text-primary-foreground/90">{image.alt}</p>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
+        <GalleryWithModal images={images} />
       </div>
     </section>
+  )
+}
+
+function GalleryWithModal({ images }: { images: { src: string; alt: string; tall: boolean }[] }) {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const previewImages = images.slice(0, 6)
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+
+  return (
+    <>
+      <FadeIn delay={0.3}>
+        <div className="mt-20">
+          <h3 className="mb-8 text-center font-serif text-2xl font-light tracking-wide text-foreground md:text-3xl">
+            Gallery
+          </h3>
+          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+            {previewImages.map((image, index) => (
+              <FadeIn key={image.src} delay={index * 0.1}>
+                <div
+                  className={`group relative mb-4 overflow-hidden break-inside-avoid ${
+                    image.tall ? "aspect-[3/4]" : "aspect-[4/3]"
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-primary/0 transition-all duration-500 group-hover:bg-primary/20" />
+                  <div className="absolute inset-x-0 bottom-0 translate-y-full p-4 transition-transform duration-500 group-hover:translate-y-0">
+                    <p className="text-sm text-primary-foreground/90">{image.alt}</p>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+
+            {/* See More Button - fills empty space in grid */}
+            <FadeIn delay={0.6}>
+              <button
+                onClick={openModal}
+                className="group relative mb-4 flex aspect-[16/9] w-full flex-col items-center justify-center gap-1 overflow-hidden break-inside-avoid rounded-lg border border-dashed border-border/50 bg-muted/20 transition-all hover:border-accent/50 hover:bg-muted/30"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-accent/10 transition-all group-hover:scale-110 group-hover:border-accent/50">
+                  <Grid3X3 className="h-4 w-4 text-accent" />
+                </div>
+                <span className="text-xs tracking-widest uppercase text-muted-foreground transition-colors group-hover:text-foreground">
+                  See More
+                </span>
+                <span className="text-[10px] text-muted-foreground/60">
+                  +{images.length - previewImages.length} photos
+                </span>
+              </button>
+            </FadeIn>
+          </div>
+        </div>
+      </FadeIn>
+
+      {/* Gallery Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          >
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={closeModal}
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="relative max-h-[90vh] w-full max-w-6xl overflow-hidden rounded-xl bg-background shadow-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-border/50 px-6 py-4">
+                <h3 className="font-serif text-xl font-light tracking-wide text-foreground">
+                  Gallery
+                </h3>
+                <button
+                  onClick={closeModal}
+                  className="flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  aria-label="Close gallery"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              {/* Scrollable Image Grid */}
+              <div className="max-h-[calc(90vh-80px)] overflow-y-auto p-6">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {images.map((image, index) => (
+                    <motion.div
+                      key={image.src}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.03 }}
+                      className={`group relative overflow-hidden rounded-lg ${
+                        image.tall ? "aspect-[3/4]" : "aspect-[4/3]"
+                      }`}
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-primary/0 transition-all duration-300 group-hover:bg-primary/20" />
+                      <div className="absolute inset-x-0 bottom-0 translate-y-full p-3 transition-transform duration-300 group-hover:translate-y-0">
+                        <p className="text-xs text-primary-foreground/90">{image.alt}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

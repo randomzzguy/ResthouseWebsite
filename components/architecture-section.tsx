@@ -5,21 +5,21 @@ import { FadeIn } from "./fade-in"
 
 const features = [
   {
-    image: "/images/chengal-wood.jpg",
+    image: "/images/28.png",
     title: "Chengal Wood",
     subtitle: "Heritage Timber",
     description:
       "Prized for centuries by Malay craftsmen, Chengal is one of the hardest tropical timbers in existence. Each beam in the Resthouse carries the grain and character of over a hundred years.",
   },
   {
-    image: "/images/solar-powered.jpg",
+    image: "/images/13.png",
     title: "Solar-Powered Life",
     subtitle: "Off-Grid Living",
     description:
       "Entirely powered by the equatorial sun, the Resthouse operates independently from the mainland grid. A commitment to treading lightly on this fragile island ecosystem.",
   },
   {
-    image: "/images/promontory.jpg",
+    image: "/images/30.png",
     title: "Secluded Promontory",
     subtitle: "The Location",
     description:

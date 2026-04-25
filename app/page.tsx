@@ -4,6 +4,7 @@ import { TimelineSection } from "@/components/timeline-section"
 import { ArchitectureSection } from "@/components/architecture-section"
 import { ConservationSection } from "@/components/conservation-section"
 import { GallerySection } from "@/components/gallery-section"
+import { ReviewsSection } from "@/components/reviews-section"
 import { QuoteSection } from "@/components/quote-section"
 import { Footer } from "@/components/footer"
 
@@ -16,6 +17,7 @@ export default function Home() {
       <ArchitectureSection />
       <ConservationSection />
       <GallerySection />
+      <ReviewsSection />
       <QuoteSection />
       <Footer />
     </main>

@@ -8,6 +8,7 @@ const navLinks = [
   { label: "The Story", href: "#story" },
   { label: "The House", href: "#house" },
   { label: "Conservation", href: "#conservation" },
+  { label: "Reviews", href: "#reviews" },
 ]
 
 export function Navigation() {

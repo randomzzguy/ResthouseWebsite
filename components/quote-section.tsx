@@ -13,7 +13,7 @@ export function QuoteSection() {
             <div className="relative w-full max-w-sm shrink-0 lg:w-2/5">
               <div className="relative aspect-[4/5] overflow-hidden rounded-lg shadow-xl">
                 <Image
-                  src="/images/hayati.jpeg"
+                  src="/images/hayati.png"
                   alt="Hayati, Founder of The Resthouse Perhentian"
                   fill
                   className="object-cover"
