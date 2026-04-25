@@ -322,44 +322,6 @@ export function ReviewsSection() {
           </div>
         </FadeIn>
 
-        {/* Review Grid Preview */}
-        <FadeIn delay={0.2}>
-          <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {reviews.map((review, index) => (
-              <motion.div
-                key={review.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`group cursor-pointer rounded-lg border border-border/30 bg-muted/10 p-5 transition-all hover:border-accent/30 hover:bg-muted/20 ${
-                  index === activeIndex ? "border-accent/50 bg-accent/5" : ""
-                }`}
-                onClick={() => {
-                  setDirection(index > activeIndex ? 1 : -1)
-                  setActiveIndex(index)
-                }}
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  <StarRating rating={review.rating} />
-                  <span className="text-xs text-muted-foreground">{review.date}</span>
-                </div>
-                <p className="mb-3 line-clamp-3 text-sm text-muted-foreground">
-                  "{review.text}"
-                </p>
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
-                    {review.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-foreground">{review.name}</p>
-                    <p className="text-xs text-muted-foreground">{review.location}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </FadeIn>
       </div>
     </section>
   )

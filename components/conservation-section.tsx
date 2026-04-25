@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { FadeIn } from "./fade-in"
-import { Sun, Droplets, Leaf, Heart } from "lucide-react"
+import { Sun, Droplets, Heart, Leaf, Quote } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 
@@ -21,23 +21,6 @@ const stats = [
   },
 ]
 
-function FloatingLeaf({ delay, x, y }: { delay: number; x: string; y: string }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 0.15, y: [0, -15, 0] }}
-      transition={{
-        opacity: { delay, duration: 1 },
-        y: { delay, duration: 4, repeat: Infinity, ease: "easeInOut" },
-      }}
-      className="absolute pointer-events-none"
-      style={{ left: x, top: y }}
-    >
-      <Leaf className="h-8 w-8 text-accent" />
-    </motion.div>
-  )
-}
-
 export function ConservationSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
@@ -45,179 +28,152 @@ export function ConservationSection() {
     offset: ["start end", "end start"],
   })
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50])
+  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30])
 
   return (
     <section
       ref={sectionRef}
       id="conservation"
-      className="relative overflow-hidden bg-primary py-24 md:py-32"
+      className="relative overflow-hidden bg-muted/20 py-24 md:py-32"
     >
-      {/* Floating decorative leaves */}
-      <FloatingLeaf delay={0.2} x="10%" y="15%" />
-      <FloatingLeaf delay={0.8} x="85%" y="25%" />
-      <FloatingLeaf delay={1.4} x="5%" y="70%" />
-      <FloatingLeaf delay={2} x="90%" y="80%" />
-
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="leaf-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path
-                d="M30 10c-5 0-9 4-9 9s4 9 9 9 9-4 9-9-4-9-9-9zm0 14c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z"
-                fill="currentColor"
-                className="text-accent"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#leaf-pattern)" />
+      {/* Organic curved top edge */}
+      <div className="absolute inset-x-0 -top-24 h-48">
+        <svg viewBox="0 0 1440 120" className="h-full w-full" preserveAspectRatio="none">
+          <path
+            fill="currentColor"
+            className="text-muted/20"
+            d="M0,0 C480,120 960,120 1440,0 L1440,120 L0,120 Z"
+          />
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-8">
-        {/* Header */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Elegant Header */}
         <FadeIn>
-          <div className="text-center">
+          <div className="mb-16 text-center">
             <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
-              className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-accent/30 bg-accent/10"
+              transition={{ duration: 0.5 }}
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5"
             >
-              <Heart className="h-7 w-7 text-accent" />
+              <Leaf className="h-4 w-4 text-primary" />
+              <span className="text-xs tracking-[0.2em] uppercase text-primary">
+                Our Mission
+              </span>
             </motion.div>
-            <p className="mb-3 text-sm tracking-[0.3em] uppercase text-primary-foreground/50">
-              Our Mission
-            </p>
-            <h2 className="font-serif text-4xl font-light tracking-wide text-primary-foreground md:text-6xl text-balance">
+            <h2 className="font-serif text-4xl font-light tracking-wide text-foreground md:text-5xl lg:text-6xl">
               Conservation First
             </h2>
           </div>
         </FadeIn>
 
-        {/* Our Pledge - Special quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mx-auto mt-12 max-w-3xl"
-        >
-          <div className="relative border-y border-accent/20 py-8 text-center">
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary px-4 text-xs tracking-[0.4em] uppercase text-accent/70">
-              Our Pledge
-            </span>
-            <p className="font-serif text-xl font-light italic leading-relaxed text-primary-foreground/90 md:text-2xl">
-              &ldquo;For every tree that shaded our path, we plant two more. For every drop of water
-              that refreshed our guests, we ensure the spring runs clearer. This is not our
-              inheritance — it is our loan from the future.&rdquo;
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Main Content - Symmetrical Two Column */}
-        <div className="mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Left: Image with parallax */}
+        {/* Main Layout - Asymmetric with overlapping elements */}
+        <div className="relative grid gap-8 lg:grid-cols-12 lg:gap-6">
+          {/* Image Column - Spans 5 cols */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
+            className="relative lg:col-span-5"
           >
-            <motion.div style={{ y: imageY }} className="relative aspect-[4/5] overflow-hidden rounded-lg">
-              <Image
-                src="/images/entrance.png"
-                alt="The Resthouse entrance surrounded by tropical greenery"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent" />
-            </motion.div>
-            {/* Decorative frame with offset */}
-            <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-lg border border-accent/30" />
-            <div className="absolute -top-3 -left-3 -z-10 h-24 w-24 rounded-full border border-accent/20" />
+            <div className="relative">
+              {/* Main Image */}
+              <motion.div
+                style={{ y: imageY }}
+                className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-2xl"
+              >
+                <Image
+                  src="/images/entrance.png"
+                  alt="The Resthouse entrance surrounded by tropical greenery"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+              </motion.div>
 
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.8 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-              className="absolute -bottom-6 left-6 flex items-center gap-3 rounded-full bg-primary-foreground px-5 py-3 shadow-xl"
-            >
-              <Leaf className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-primary">Eco-Certified</span>
-            </motion.div>
+              {/* Floating Stats Card */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="absolute -bottom-6 -left-4 right-4 rounded-xl border border-primary/10 bg-background/95 p-4 shadow-lg backdrop-blur-sm lg:-right-8"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  {stats.map((stat, i) => (
+                    <div key={stat.label} className="flex-1 text-center">
+                      <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                        <stat.icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <p className="font-serif text-xl font-light text-foreground">{stat.value}</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Accent Corner */}
+              <div className="absolute -right-3 -top-3 h-24 w-24 rounded-full border-2 border-dashed border-primary/20" />
+            </div>
           </motion.div>
 
-          {/* Right: Content */}
-          <div className="space-y-8">
+          {/* Content Column - Spans 7 cols */}
+          <div className="flex flex-col justify-center lg:col-span-7 lg:pl-8">
+            {/* Pledge Quote Card */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative mb-8 rounded-2xl border border-primary/10 bg-gradient-to-br from-primary/5 to-transparent p-8"
             >
-              <p className="text-lg leading-relaxed font-light text-primary-foreground/80">
+              <Quote className="absolute -top-3 left-6 h-6 w-6 text-primary/30" />
+              <p className="font-serif text-lg font-light italic leading-relaxed text-foreground/90 lg:text-xl">
+                &ldquo;For every tree that shaded our path, we plant two more. For every drop of water
+                that refreshed our guests, we ensure the spring runs clearer. This is not our
+                inheritance — it is our loan from the future.&rdquo;
+              </p>
+              <div className="mt-4 flex items-center gap-2">
+                <div className="h-px flex-1 bg-primary/20" />
+                <span className="text-xs tracking-[0.3em] uppercase text-primary/60">Our Pledge</span>
+                <div className="h-px flex-1 bg-primary/20" />
+              </div>
+            </motion.div>
+
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="space-y-4"
+            >
+              <p className="text-base leading-relaxed text-foreground/80">
                 The Resthouse exists not despite the natural world, but because of it. Every
                 decision we make — from energy to waste, from building materials to guest
                 activities — is guided by a single principle: leave this island better than we
                 found it.
               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            >
-              <p className="leading-relaxed text-primary-foreground/60">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 Rainwater is harvested, waste is composted, and nothing is brought to the island
                 that cannot be taken back. The Resthouse is proof that comfort and restraint are
-                not opposites — that the quietest footprint can leave the deepest impression.
+                not opposites.
               </p>
             </motion.div>
 
-            {/* Stats with animated dividers */}
+            {/* Eco Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-              className="space-y-4 pt-4"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mt-8 inline-flex items-center gap-3 self-start rounded-full border border-primary/20 bg-primary px-5 py-2.5 text-primary-foreground shadow-lg"
             >
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + index * 0.15, duration: 0.5 }}
-                  className="group flex items-center gap-6 border-l-2 border-accent/40 pl-6 transition-colors hover:border-accent/70"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="flex h-12 w-12 flex-none items-center justify-center rounded-full border border-accent/30 transition-colors group-hover:border-accent/60"
-                  >
-                    <stat.icon className="h-5 w-5 text-accent transition-transform group-hover:scale-110" />
-                  </motion.div>
-                  <div className="flex-1">
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-serif text-3xl font-light text-primary-foreground">
-                        {stat.value}
-                      </span>
-                      <span className="text-sm tracking-widest uppercase text-primary-foreground/70">
-                        {stat.label}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-sm text-primary-foreground/50">{stat.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+              <Heart className="h-4 w-4 fill-current" />
+              <span className="text-sm font-medium tracking-wide">Eco-Certified Stay</span>
             </motion.div>
           </div>
         </div>

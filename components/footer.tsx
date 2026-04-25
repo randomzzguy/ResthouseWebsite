@@ -85,7 +85,7 @@ export function Footer() {
               Connect
             </p>
             <h2 className="font-serif text-3xl font-light tracking-wide text-primary-foreground md:text-4xl text-balance">
-              Begin Your Journey
+              Your Island Escape Awaits
             </h2>
             <p className="mx-auto mt-6 max-w-lg leading-relaxed text-primary-foreground/60">
               The Resthouse Perhentian welcomes a limited number of guests each season. Reach out

@@ -8,7 +8,7 @@ export function HeroSection() {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.7 // 70% speed - slower, more cinematic
+      videoRef.current.playbackRate = 0.65 // 65% speed - slower, more cinematic
     }
   }, [])
 
