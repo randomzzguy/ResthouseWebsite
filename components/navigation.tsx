@@ -53,7 +53,7 @@ export function Navigation() {
               href="#connect"
               className="border border-primary-foreground/40 px-5 py-2 text-sm tracking-widest uppercase text-primary-foreground transition-all hover:bg-primary-foreground hover:text-primary"
             >
-              Connect
+              Inquire
             </a>
           </div>
 
@@ -93,7 +93,7 @@ export function Navigation() {
               onClick={() => setMobileOpen(false)}
               className="mt-4 border border-primary-foreground/40 px-8 py-3 text-sm tracking-widest uppercase text-primary-foreground transition-all hover:bg-primary-foreground hover:text-primary"
             >
-              Connect
+              Inquire
             </a>
           </motion.div>
         )}
