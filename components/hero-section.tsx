@@ -27,7 +27,7 @@ export function HeroSection() {
       </video>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-primary/50" />
+      <div className="absolute inset-0 bg-[#1a3a2a]/50" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
@@ -62,7 +62,7 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 1.0 }}
           className="mx-auto max-w-2xl font-sans text-base leading-relaxed font-light text-primary-foreground/80 md:text-lg"
         >
-          A 1920s heritage home, salvaged from the mainland and reborn on the shores of Perhentian Besar.
+          A 1940s heritage home, salvaged from the mainland and reborn on the shores of Perhentian Besar.
         </motion.p>
 
         <motion.div

@@ -16,7 +16,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: 'The Resthouse Perhentian | A Heritage Sanctuary',
   description:
-    'A 1920s colonial heritage home, salvaged from the Malaysian mainland and reborn on the pristine shores of Perhentian Besar. Experience slow tourism and conservation-first living.',
+    'A 1940s colonial heritage home, salvaged from the Malaysian mainland and reborn on the pristine shores of Perhentian Besar. Experience slow tourism and conservation-first living.',
   icons: {
     icon: [
       {

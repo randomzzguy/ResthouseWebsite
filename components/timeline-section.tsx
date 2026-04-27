@@ -4,7 +4,7 @@ import { FadeIn } from "./fade-in"
 
 const timelineItems = [
   {
-    year: "1920",
+    year: "1945",
     title: "Ipoh Beginnings",
     description:
       "Built in the heart of Perak's tin mining region, the house stood as a testament to colonial Malayan craftsmanship. Chengal wood beams and intricate joinery told the story of a different era\u2014one of languid afternoons and the steady rhythm of tropical rain on a tin roof.",
