@@ -26,8 +26,8 @@ export function HeroSection() {
         <source src="/videos/hero-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-[#1a3a2a]/50" />
+      {/* Darker blue overlay for text contrast */}
+      <div className="absolute inset-0 bg-[#2c5f7c]/50" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
