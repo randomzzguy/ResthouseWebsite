@@ -46,8 +46,8 @@ export function Navigation() {
                 href={link.href}
                 className={`px-5 py-2 text-sm tracking-widest uppercase transition-colors ${
                   index % 2 === 0
-                    ? "bg-black text-white hover:bg-neutral-800"
-                    : "bg-white text-black hover:bg-neutral-100"
+                    ? "bg-white text-black hover:bg-neutral-100"
+                    : "bg-black text-white hover:bg-neutral-800"
                 }`}
               >
                 {link.label}
@@ -55,7 +55,7 @@ export function Navigation() {
             ))}
             <a
               href="#connect"
-              className="bg-black px-5 py-2 text-sm tracking-widest uppercase text-white transition-all hover:bg-neutral-800"
+              className="px-5 py-2 text-sm tracking-widest uppercase bg-white text-black transition-colors hover:bg-neutral-100"
             >
               Inquire
             </a>
@@ -80,17 +80,17 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col items-stretch justify-center bg-primary"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-4 bg-primary px-8"
           >
             {navLinks.map((link, index) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`w-full py-6 text-center font-serif text-3xl transition-colors ${
+                className={`w-full max-w-xs py-4 text-center font-serif text-2xl transition-colors rounded-sm ${
                   index % 2 === 0
-                    ? "bg-black text-white hover:bg-neutral-800"
-                    : "bg-white text-black hover:bg-neutral-100"
+                    ? "bg-white text-black hover:bg-neutral-100"
+                    : "bg-black text-white hover:bg-neutral-800"
                 }`}
               >
                 {link.label}
@@ -99,7 +99,7 @@ export function Navigation() {
             <a
               href="#connect"
               onClick={() => setMobileOpen(false)}
-              className="w-full py-6 text-center text-sm tracking-widest uppercase bg-black text-white transition-all hover:bg-neutral-800"
+              className="w-full max-w-xs py-4 text-center font-serif text-2xl bg-white text-black transition-colors rounded-sm hover:bg-neutral-100"
             >
               Inquire
             </a>
